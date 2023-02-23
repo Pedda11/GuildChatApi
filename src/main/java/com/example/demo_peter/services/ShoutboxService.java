@@ -28,7 +28,7 @@ public class ShoutboxService {
     public int generateId() {
         List<ShoutBoxEntry> all = shoutboxRepository.findAll();
 
-        List<Integer> allIds = new ArrayList<Integer>();
+        List<Integer> allIds = new ArrayList<>();
         for (ShoutBoxEntry entry : all) {
             allIds.add(entry.getId());
         }
