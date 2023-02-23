@@ -1,13 +1,8 @@
 package com.example.demo_peter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.persistence.GeneratedValue;
 
 
 @Getter
@@ -18,7 +13,6 @@ public class ShoutBoxEntry {
 
     @Id
     @Column(name = "shoutbox_id")
-    @GeneratedValue
     private int id;
 
     @Column(name = "user_or_member_id")
