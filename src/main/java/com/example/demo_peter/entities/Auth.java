@@ -1,19 +1,14 @@
 package com.example.demo_peter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.persistence.GeneratedValue;
 
 @Getter
 @Setter
 @Table(name = "eqdkp23_users")
 @Entity
-public class User {
+public class Auth {
 
     @Id
     @Column(name = "user_id")
@@ -22,5 +17,8 @@ public class User {
 
     @Column(name = "username")
     private String userName;
+
+    @Column(name = "user_password")
+    private String userPasswd;
 
 }

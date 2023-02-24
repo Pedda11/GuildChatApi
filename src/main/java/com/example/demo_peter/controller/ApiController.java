@@ -1,9 +1,12 @@
 package com.example.demo_peter.controller;
 
+import com.example.demo_peter.dtos.LoginInput;
 import com.example.demo_peter.entities.*;
 import com.example.demo_peter.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,10 @@ public class ApiController {
     private UserGroupService userGroupService;
     @Autowired
     private GroupInfoService groupInfoService;
+    @Autowired
+    private AuthService authService;
+
+    // GET REQUESTS
 
     @RequestMapping(value = "/entries", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<ShoutBoxEntry> entries() {
@@ -58,8 +65,40 @@ public class ApiController {
         return eventService.getComingEvents();
     }
 
+    // POST REQUESTS
+
     @PostMapping("/entry")
-    void createNewEntry(@RequestBody ShoutBoxEntry newEntry) {
+    public ResponseEntity<String> createNewEntry(@RequestBody ShoutBoxEntry newEntry) {
         shoutboxService.insertEntry(newEntry);
+        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
+
+    @PostMapping("/auth")
+    public ResponseEntity<User> authorizeUser(@RequestBody LoginInput loginInput) {
+        boolean auth = authService.authUser(loginInput.getUsername(), loginInput.getPassword());
+        if (auth) {
+            User user = userService.findUserByUsername(loginInput.getUsername());
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new User(), HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    // ERROR HANDLING
+
+    @GetMapping("/error")
+    public ResponseEntity<String> errorGet() {
+        return new ResponseEntity<>("Bad Request \n", HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/error")
+    public ResponseEntity<String> errorPost() {
+        return new ResponseEntity<>("Bad Request \n", HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/error")
+    public ResponseEntity<String> errorPut() {
+        return new ResponseEntity<>("Bad Request \n", HttpStatus.BAD_REQUEST);
+    }
+
 }
