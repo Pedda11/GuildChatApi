@@ -1,6 +1,6 @@
 package com.example.demo_peter.controller;
 
-import com.example.demo_peter.dtos.LoginInput;
+import com.example.demo_peter.dtos.AuthInput;
 import com.example.demo_peter.entities.*;
 import com.example.demo_peter.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +74,10 @@ public class ApiController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<User> authorizeUser(@RequestBody LoginInput loginInput) {
-        boolean auth = authService.authUser(loginInput.getUsername(), loginInput.getPassword());
+    public ResponseEntity<User> authorizeUser(@RequestBody AuthInput authInput) {
+        boolean auth = authService.authUser(authInput.getUsername(), authInput.getPassword());
         if (auth) {
-            User user = userService.findUserByUsername(loginInput.getUsername());
+            User user = userService.findUserByUsername(authInput.getUsername());
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new User(), HttpStatus.UNAUTHORIZED);
