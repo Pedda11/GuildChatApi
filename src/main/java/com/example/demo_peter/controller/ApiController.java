@@ -70,7 +70,7 @@ public class ApiController {
     @PostMapping("/entry")
     public ResponseEntity<String> createNewEntry(@RequestBody ShoutBoxEntry newEntry) {
         shoutboxService.insertEntry(newEntry);
-        return new ResponseEntity<>("created", HttpStatus.CREATED);
+        return new ResponseEntity<>("created \n", HttpStatus.CREATED);
     }
 
     @PostMapping("/auth")
