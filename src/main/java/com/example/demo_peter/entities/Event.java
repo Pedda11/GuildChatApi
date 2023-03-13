@@ -1,13 +1,8 @@
 package com.example.demo_peter.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.persistence.GeneratedValue;
 
 
 @Getter
@@ -51,9 +46,6 @@ public class Event {
     @Column(name = "closed")
     private boolean isClosed;
 
-    @Column(name = "extension")
-    private String extension;
-
     @Column(name = "notes")
     private String notes;
 
@@ -62,5 +54,11 @@ public class Event {
 
     @Column(name = "timezone")
     private String timeZone;
+
+    @Transient
+    private String title;
+
+    @Transient
+    private String icon;
 
 }
