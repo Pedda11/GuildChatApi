@@ -7,6 +7,8 @@ import com.example.demo_peter.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,6 @@ public class EventService {
 
     public List<Event> getComingEvents(){
         long secondsSinceEpoch = java.time.Instant.now().getEpochSecond();
-
         List<Event> events = new ArrayList<Event>();
 
         for (Event e : getAll()) {
@@ -40,8 +41,12 @@ public class EventService {
         List<EventItem> items = eventItemRepository.findAll();
 
         for (Event e : events) {
+
+            String[] ext = e.getExtension().split(";");
+            int id = Integer.parseInt(ext[1].substring(2));
+
             for (EventItem i : items) {
-                if (e.getId() == i.getId()){
+                if (id == i.getId()){
                     e.setTitle(i.getTitle());
                     e.setIcon(i.getIcon());
                 }

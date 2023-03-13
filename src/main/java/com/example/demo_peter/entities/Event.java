@@ -55,6 +55,9 @@ public class Event {
     @Column(name = "timezone")
     private String timeZone;
 
+    @Column(name = "extension")
+    private String extension;
+
     @Transient
     private String title;
 
