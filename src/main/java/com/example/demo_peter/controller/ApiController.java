@@ -73,6 +73,12 @@ public class ApiController {
         return new ResponseEntity<>("created \n", HttpStatus.CREATED);
     }
 
+    @PostMapping("/info_entry")
+    public ResponseEntity<String> createNewEntry(@RequestBody InfoChatEntry newEntry) {
+        infoChatService.insertEntry(newEntry);
+        return new ResponseEntity<>("created \n", HttpStatus.CREATED);
+    }
+
     @PostMapping("/auth")
     public ResponseEntity<User> authorizeUser(@RequestBody AuthInput authInput) {
         boolean auth = authService.authUser(authInput.getUsername(), authInput.getPassword());

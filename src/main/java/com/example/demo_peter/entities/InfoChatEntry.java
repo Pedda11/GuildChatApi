@@ -18,7 +18,6 @@ public class InfoChatEntry {
 
     @Id
     @Column(name = "shoutbox_id")
-    @GeneratedValue
     private int id;
 
     @Column(name = "user_or_member_id")
