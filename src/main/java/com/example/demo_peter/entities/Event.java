@@ -26,7 +26,7 @@ public class Event {
     private String name;
 
     @Column(name = "creator")
-    private String creator;
+    private int creator;
 
     @Column(name = "timestamp_start")
     private long tsStart;

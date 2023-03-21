@@ -23,4 +23,7 @@ public class User {
     @Column(name = "username")
     private String userName;
 
+    @Column(name = "custom_fields")
+    private String custom;
+
 }
